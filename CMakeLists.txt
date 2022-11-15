@@ -3,11 +3,12 @@ project(CPP_Game_Engine)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(Game_Engine src/main.cpp external/glad/src/glad.c src/engine/window.cpp)
+add_executable(Game_Engine src/main.cpp external/glad/src/glad.c src/engine/Window.cpp src/util/Color.cpp src/engine/Engine.cpp)
 include_directories(include)
-include_directories(include/engine)
+include_directories(include)
 include_directories(external/glad/include)
 include_directories(external/glfw/include)
+include_directories(external/glm)
 
 find_library(GLFW3 glfw3 external/glfw/lib)
 find_library(GLFW3DLL glfw3dll external/glfw/lib)
