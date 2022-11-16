@@ -11,12 +11,23 @@
 
 namespace GameEngine {
     class Window {
-    public:
-        static GLFWwindow* glfwWindow;
-        static int windowWidth;
-        static int windowHeight;
+        static Window* instance;
+        GLFWwindow* glfwWindow;
+        int windowWidth;
+        int windowHeight;
 
-        static void initWindow(int width, int height, const char* title);
+        Window() {};
+
+    public:
+        static Window* getInstance();
+
+        void initWindow(int width, int height, const char* title);
+
+        GLFWwindow *getGlfwWindow() const;
+
+        int getWindowWidth() const;
+
+        int getWindowHeight() const;
     };
 }
 

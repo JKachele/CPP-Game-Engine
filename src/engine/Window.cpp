@@ -10,6 +10,13 @@ namespace GameEngine {
 
     void framebuffer_size_callback(__attribute__((unused)) GLFWwindow* window, int width, int height);
 
+    Window* getInstance() {
+        if (instance) {
+            instance = new Window();
+
+        }
+    }
+
     void Window::initWindow(int width, int height, const char* title) {
         glfwInit();
         glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
@@ -30,6 +37,18 @@ namespace GameEngine {
         glViewport(0, 0, width, height);
 
         glfwSetFramebufferSizeCallback(glfwWindow, framebuffer_size_callback);
+    }
+
+    GLFWwindow* Window::getGlfwWindow() const {
+        return glfwWindow;
+    }
+
+    int Window::getWindowWidth() const {
+        return windowWidth;
+    }
+
+    int Window::getWindowHeight() const {
+        return windowHeight;
     }
 
     void framebuffer_size_callback(__attribute__((unused)) GLFWwindow* window, int width, int height) {
