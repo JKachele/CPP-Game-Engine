@@ -11,12 +11,17 @@
 #include "Window.h"
 
 namespace GameEngine {
-    struct Engine {
-        static Color backgroundColor;
+    class Engine {
+        Window* window;
+        Color backgroundColor;
 
-        static void initEngine(int width, int height, const char *title, Color backgroundColor);
-        static void run();
-        static void terminate();
+    public:
+        Engine(int width, int height, const char* title, Color backgroundColor);
+        void run();
+        void terminate();
+
+    private:
+        void gameLoop();
     };
 }
 #endif //CPP_GAME_ENGINE_ENGINE_H

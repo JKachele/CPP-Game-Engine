@@ -6,19 +6,12 @@
  ******************************************/
 #include "engine/Engine.h"
 #include "engine/Window.h"
+#include "engine/UserInputs.h"
 
-namespace GameEngine {
-    void printFPS(uint64_t dt);
-    void gameLoop();
-
-    void Engine::initEngine(int width, int height, const char *title, GameEngine::Color color) {
-        backgroundColor = color;
-        Window::initWindow(width, height, title);
-    }
-
-    uint64_t getCurrentTime() {
-        using namespace std::chrono;
-        return duration_cast<milliseconds>(system_clock::now().time_since_epoch()).count();
+namespace GameEngine {\
+    Engine::Engine(int width, int height, const char* title, GameEngine::Color color) : backgroundColor(color){
+        window = Window::getInstance();
+        window->initWindow(width, height, title);
     }
 
     void Engine::run() {
@@ -29,31 +22,27 @@ namespace GameEngine {
         glfwTerminate();
     }
 
-    void gameLoop() {
-        uint64_t beginTime = getCurrentTime();
-        uint64_t endTime;
-        int dt = -1;
+    void Engine::gameLoop() {
+        float beginTime = glfwGetTime();
+        float endTime;
+        float dt = -1;
 
-        glClearColor(Engine::backgroundColor.r, Engine::backgroundColor.g,
-                     Engine::backgroundColor.b, Engine::backgroundColor.a);
+        glClearColor(backgroundColor.r, backgroundColor.g,
+                     backgroundColor.b, backgroundColor.a);
 
-        while(!glfwWindowShouldClose(Window::glfwWindow)) {
+        while(!glfwWindowShouldClose(window->getGlfwWindow())) {
 
             glfwPollEvents();
 
             glClear(GL_COLOR_BUFFER_BIT);
 
-            glfwSwapBuffers(Window::glfwWindow);
+            glfwSwapBuffers(window->getGlfwWindow());
 
-            printFPS(dt);
+            UserInputs::endFrame();
 
-            endTime = getCurrentTime();
+            endTime = glfwGetTime();
             dt = endTime - beginTime;
             beginTime = endTime;
         }
-    }
-
-    void printFPS(uint64_t dt) {
-        std::cout << 1 / dt << " FPS" << std::endl;
     }
 }

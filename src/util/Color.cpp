@@ -7,8 +7,7 @@
 #include "util/Color.h"
 
 namespace GameEngine {
-
-    glm::vec4 Color::toVector() {
+    glm::vec4 Color::toVector() const{
         glm::vec4 vector{r, g, b, a};
         return vector;
     }

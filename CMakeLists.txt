@@ -3,8 +3,13 @@ project(CPP_Game_Engine)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(Game_Engine src/main.cpp external/glad/src/glad.c src/engine/Window.cpp src/util/Color.cpp src/engine/Engine.cpp)
-add_executable(Scratch scratchFiles/scratch.cpp)
+add_executable(Game_Engine src/main.cpp
+        external/glad/src/glad.c
+        src/engine/Window.cpp
+        src/util/Color.cpp
+        src/engine/Engine.cpp
+        src/engine/UserInputs.cpp)
+add_executable(Scratch testFiles/Test.cpp)
 include_directories(include)
 include_directories(include)
 include_directories(external/glad/include)
