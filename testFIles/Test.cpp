@@ -5,8 +5,22 @@
  *License-------Mozilla Public License Version 2.0
  ******************************************/
 #include <iostream>
+#include <fstream>
 
 int main() {
-    std::cout << "Hello World!" << std::endl;
-    return 0;
+    std::string vertexShaderFile = "../assets/shaders/defaultVert.glsl";
+
+    std::ifstream vert{vertexShaderFile};
+
+    if (!vert) {
+        std::cerr << "Failed to open file " << vertexShaderFile << std::endl;
+        return -1;
+    }
+
+    while (vert) {
+        std::string vertexShader;
+        vert >> vertexShader;
+        std::cout << vertexShader << std::endl;
+    }
+
 }

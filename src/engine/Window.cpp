@@ -17,7 +17,14 @@ namespace GameEngine {
         return instance;
     }
 
-    void Window::initWindow(int width, int height, const char* title) {
+    void Window::init(int windowWidth, int windowHeight, const char *title) {
+        this->windowWidth = windowWidth;
+        this->windowHeight = windowHeight;
+        this->title = title;
+
+    }
+
+    void Window::startWindow() {
         if (!glfwInit()) {
             std::cerr << "Failed to initialize GLFW" << std::endl;
             return;
@@ -32,7 +39,7 @@ namespace GameEngine {
         glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);  // Window will be resizeable
 
         // Create the window
-        glfwWindow = glfwCreateWindow(width, height, title, nullptr, nullptr);
+        glfwWindow = glfwCreateWindow(windowWidth, windowHeight, title, nullptr, nullptr);
         if (glfwWindow == nullptr) {
             std::cerr << "Failed to create GLFW window" << std::endl;
             glfwTerminate();
@@ -54,7 +61,7 @@ namespace GameEngine {
         glfwSetKeyCallback(glfwWindow, UserInputs::keyCallback);
 
         // set the viewport to the size of the window
-        glViewport(0, 0, width, height);
+        glViewport(0, 0, windowWidth, windowHeight);
         glfwSetFramebufferSizeCallback(glfwWindow, [](GLFWwindow* window, int width, int height) {
             glViewport(0, 0, width, height);
         });
@@ -63,7 +70,7 @@ namespace GameEngine {
         const GLFWvidmode* vidMode = glfwGetVideoMode(glfwGetPrimaryMonitor());
         if (vidMode != nullptr) {
             glfwSetWindowPos(glfwWindow,
-                             (vidMode->width - width) / 2, (vidMode->height - height) / 2);
+                             (vidMode->width - windowWidth) / 2, (vidMode->height - windowHeight) / 2);
         }
 
         glfwSwapInterval(1);    // Enable v-sync: Sets max FPS to screen refresh rate

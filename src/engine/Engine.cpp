@@ -8,10 +8,11 @@
 #include "engine/Window.h"
 #include "engine/UserInputs.h"
 
-namespace GameEngine {\
+namespace GameEngine {
     Engine::Engine(int width, int height, const char* title, GameEngine::Color color) : backgroundColor(color){
         window = Window::getInstance();
-        window->initWindow(width, height, title);
+        window->init(width, height, title);
+        window->startWindow();
     }
 
     void Engine::run() {

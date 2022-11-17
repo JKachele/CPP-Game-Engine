@@ -15,13 +15,16 @@ namespace GameEngine {
         GLFWwindow* glfwWindow;
         int windowWidth;
         int windowHeight;
+        const char* title;
 
         Window() {};
 
     public:
         static Window* getInstance();
 
-        void initWindow(int width, int height, const char* title);
+        void init(int windowWidth, int windowHeight, const char* title);
+
+        void startWindow();
 
         GLFWwindow *getGlfwWindow() const;
 
