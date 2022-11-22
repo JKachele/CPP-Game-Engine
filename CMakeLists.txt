@@ -16,7 +16,11 @@ set(SOURCE_FILES
         src/engine/UserInputs.cpp
         include/engine/UserInputs.h
         src/scenes/Scene.cpp
-        include/scenes/Scene.h src/scenes/MainScene.cpp include/scenes/MainScene.h src/render/Shader.cpp include/render/Shader.h)
+        include/scenes/Scene.h
+        src/scenes/MainScene.cpp
+        include/scenes/MainScene.h
+        src/render/Shader.cpp
+        include/render/Shader.h)
 
 add_executable(Game_Engine ${SOURCE_FILES} ${EXTERNAL})
 add_executable(Scratch testFiles/Test.cpp)
