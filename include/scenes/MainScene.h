@@ -7,12 +7,14 @@
 #ifndef CPP_GAME_ENGINE_MAINSCENE_H
 #define CPP_GAME_ENGINE_MAINSCENE_H
 #include "Scene.h"
+#include "render/Shader.h"
 
 namespace GameEngine {
     class MainScene : public Scene {
-        int vaoID;
-        int vboID;
-        int eboID;
+        unsigned int vaoID;
+        unsigned int vboID;
+        unsigned int eboID;
+        Shader* defaultShader;
 
         float vertexArray[36] = {
                 // Position                            // Color                                   // UV Coordinates

@@ -112,6 +112,9 @@ namespace GameEngine {
         glUseProgram(0);
     }
 
+    // =========================================================
+    // Upload data types to the GPU
+    // =========================================================
     void Shader::uploadInt(std::string &varName, int val) {
         int varLocation = glGetUniformLocation(this->shaderProgramID, varName.c_str());
         Shader::use();
@@ -148,9 +151,21 @@ namespace GameEngine {
         glUniform4f(varLocation, vec4.x, vec4.y, vec4.z, vec4.w);
     }
 
-    void Shader::uploadMat3(std::string &varName, glm::mat3x3 mat3) {
+    void Shader::uploadMat3(std::string &varName, glm::mat3 mat3) {
         int varLocation = glGetUniformLocation(this->shaderProgramID, varName.c_str());
         Shader::use();
+        glUniformMatrix3fv(varLocation, 1, GL_FALSE, glm::value_ptr(mat3));
+    }
 
+    void Shader::uploadMat4(std::string &varName, glm::mat4 mat4) {
+        int varLocation = glGetUniformLocation(this->shaderProgramID, varName.c_str());
+        Shader::use();
+        glUniformMatrix4fv(varLocation, 1, GL_FALSE, glm::value_ptr(mat4));
+    }
+
+    void Shader::uploadTexture(std::string &varName, int slot) {
+        int varLocation = glGetUniformLocation(this->shaderProgramID, varName.c_str());
+        Shader::use();
+        glUniform1i(varLocation, slot);
     }
 }

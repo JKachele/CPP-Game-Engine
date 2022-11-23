@@ -5,8 +5,10 @@
  *License-------Mozilla Public License Version 2.0
  ******************************************/
 #include <iostream>
+#include <glm/mat4x4.hpp>
 
 int main() {
-    std::string vertexShaderFile = "../assets/shaders/defaultVert.glsl";
-    std::string fragmentShaderFile = "../assets/shaders/defaultFrag.glsl";
+    glm::mat4x4 mat{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
+
+    std::cout << mat[1][0] << std::endl;
 }
