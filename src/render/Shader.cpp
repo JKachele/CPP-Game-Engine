@@ -11,23 +11,23 @@
 namespace GameEngine {
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "LocalValueEscapesScope"
-    Shader::Shader(const std::string& vertexShaderFile, const std::string& fragmentShaderFile) {
+    Shader::Shader(const string& vertexShaderFile, const string& fragmentShaderFile) {
         std::ifstream vert{vertexShaderFile};
         std::ifstream frag{fragmentShaderFile};
-        std::string vertexShaderString;
-        std::string fragmentShaderString;
+        string vertexShaderString;
+        string fragmentShaderString;
 
         if (!vert) {
-            std::cerr << "Failed to open file " << vertexShaderFile << std::endl;
+            cerr << "Failed to open file " << vertexShaderFile << endl;
             return;
         }
         if (!frag) {
-            std::cerr << "Failed to open file " << fragmentShaderFile << std::endl;
+            cerr << "Failed to open file " << fragmentShaderFile << endl;
             return;
         }
 
         while (vert) {
-            std::string line;
+            string line;
             std::getline(vert, line);
             if (line.empty()) continue;
             vertexShaderString += line;
@@ -37,7 +37,7 @@ namespace GameEngine {
         this->vertexShader = vertexShaderString.c_str();
 
         while (frag) {
-            std::string line;
+            string line;
             std::getline(frag, line);
             if (line.empty()) continue;
             fragmentShaderString += line;
@@ -68,7 +68,7 @@ namespace GameEngine {
         if (!success) {
             char infoLog[512];
             glGetShaderInfoLog(vertexID, 512, NULL, infoLog);
-            std::cout << "ERROR::SHADER::VERTEX::COMPILATION_FAILED\n" << infoLog << std::endl;
+            cerr << "ERROR::SHADER::VERTEX::COMPILATION_FAILED\n" << infoLog << endl;
         }
         // create a unique id for the fragment shader
         fragmentID = glCreateShader(GL_FRAGMENT_SHADER);
@@ -82,7 +82,7 @@ namespace GameEngine {
         if (!success) {
             char infoLog[512];
             glGetShaderInfoLog(fragmentID, 512, NULL, infoLog);
-            std::cout << "ERROR::SHADER::FRAGMENT::COMPILATION_FAILED\n" << infoLog << std::endl;
+            cerr << "ERROR::SHADER::FRAGMENT::COMPILATION_FAILED\n" << infoLog << endl;
         }
 
         // =========================================================
@@ -98,7 +98,7 @@ namespace GameEngine {
         if (!success) {
             char infoLog[512];
             glGetProgramInfoLog(this->shaderProgramID, 512, NULL, infoLog);
-            std::cout << "ERROR::SHADER::PROGRAM::LINKING_FAILED\n" << infoLog << std::endl;
+            cerr << "ERROR::SHADER::PROGRAM::LINKING_FAILED\n" << infoLog << endl;
         }
         glDeleteShader(vertexID);
         glDeleteShader(fragmentID);
@@ -115,55 +115,56 @@ namespace GameEngine {
     // =========================================================
     // Upload data types to the GPU
     // =========================================================
-    void Shader::uploadInt(std::string &varName, int val) {
+    void Shader::uploadInt(const string &varName, const int val) {
         int varLocation = glGetUniformLocation(this->shaderProgramID, varName.c_str());
         Shader::use();
         glUniform1i(varLocation, val);
     }
 
-    void Shader::uploadIntArray(std::string &varName, int* array, int size) {
+    template<std::size_t size>
+    void Shader::uploadIntArray(const string &varName, const std::array<int, size> &array) {
         int varLocation = glGetUniformLocation(this->shaderProgramID, varName.c_str());
         Shader::use();
         glUniform1iv(varLocation, size, array);
     }
 
-    void Shader::uploadFloat(std::string &varName, float val) {
+    void Shader::uploadFloat(const string &varName, const float val) {
         int varLocation = glGetUniformLocation(this->shaderProgramID, varName.c_str());
         Shader::use();
         glUniform1f(varLocation, val);
     }
 
-    void Shader::uploadVec2(std::string &varName, glm::vec2 vec2) {
+    void Shader::uploadVec2(const string &varName, const glm::vec2 vec2) {
         int varLocation = glGetUniformLocation(this->shaderProgramID, varName.c_str());
         Shader::use();
         glUniform2f(varLocation, vec2.x, vec2.y);
     }
 
-    void Shader::uploadVec3(std::string &varName, glm::vec3 vec3) {
+    void Shader::uploadVec3(const string &varName, const glm::vec3 vec3) {
         int varLocation = glGetUniformLocation(this->shaderProgramID, varName.c_str());
         Shader::use();
         glUniform3f(varLocation, vec3.x, vec3.y, vec3.z);
     }
 
-    void Shader::uploadVec4(std::string &varName, glm::vec4 vec4) {
+    void Shader::uploadVec4(const string &varName, const glm::vec4 vec4) {
         int varLocation = glGetUniformLocation(this->shaderProgramID, varName.c_str());
         Shader::use();
         glUniform4f(varLocation, vec4.x, vec4.y, vec4.z, vec4.w);
     }
 
-    void Shader::uploadMat3(std::string &varName, glm::mat3 mat3) {
+    void Shader::uploadMat3(const string &varName, const glm::mat3 mat3) {
         int varLocation = glGetUniformLocation(this->shaderProgramID, varName.c_str());
         Shader::use();
         glUniformMatrix3fv(varLocation, 1, GL_FALSE, glm::value_ptr(mat3));
     }
 
-    void Shader::uploadMat4(std::string &varName, glm::mat4 mat4) {
+    void Shader::uploadMat4(const string &varName, const glm::mat4 mat4) {
         int varLocation = glGetUniformLocation(this->shaderProgramID, varName.c_str());
         Shader::use();
         glUniformMatrix4fv(varLocation, 1, GL_FALSE, glm::value_ptr(mat4));
     }
 
-    void Shader::uploadTexture(std::string &varName, int slot) {
+    void Shader::uploadTexture(const string &varName, const int slot) {
         int varLocation = glGetUniformLocation(this->shaderProgramID, varName.c_str());
         Shader::use();
         glUniform1i(varLocation, slot);

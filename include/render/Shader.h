@@ -6,7 +6,8 @@
  ******************************************/
 #ifndef CPP_GAME_ENGINE_SHADER_H
 #define CPP_GAME_ENGINE_SHADER_H
-#include <string>
+#include <valarray>
+#include <array>
 #include "core.h"
 
 namespace GameEngine {
@@ -16,22 +17,23 @@ namespace GameEngine {
         const char* fragmentShader;
 
     public:
-        Shader(const std::string& vertexShaderFile, const std::string& fragmentShaderFile);
+        Shader(const string& vertexShaderFile, const string& fragmentShaderFile);
 
         void compile();
 
         void use();
         void detach();
 
-        void uploadInt(std::string &varName, int val);
-        void uploadIntArray(std::string &varName, int* array, int size);
-        void uploadFloat(std::string &varName, float val);
-        void uploadVec2(std::string &varName, glm::vec2 vec2);
-        void uploadVec3(std::string &varName, glm::vec3 vec3);
-        void uploadVec4(std::string &varName, glm::vec4 vec4);
-        void uploadMat3(std::string &varName, glm::mat3 mat3);
-        void uploadMat4(std::string &varName, glm::mat4 mat4);
-        void uploadTexture(std::string &varName, int slot);
+        void uploadInt(const string &varName, const int val);
+        template<std::size_t size>
+        void uploadIntArray(const string &varName, const std::array<int, size> &array);
+        void uploadFloat(const string &varName, const float val);
+        void uploadVec2(const string &varName, const glm::vec2 vec2);
+        void uploadVec3(const string &varName, const glm::vec3 vec3);
+        void uploadVec4(const string &varName, const glm::vec4 vec4);
+        void uploadMat3(const string &varName, const glm::mat3 mat3);
+        void uploadMat4(const string &varName, const glm::mat4 mat4);
+        void uploadTexture(const string &varName, const int slot);
     };
 }
 

@@ -9,6 +9,7 @@
 
 namespace GameEngine {
     Window* Window::instance = 0;
+    Scene* Window::currentScene = 0;
 
     Window* Window::getInstance() {
         if (!instance) {
@@ -17,16 +18,15 @@ namespace GameEngine {
         return instance;
     }
 
-    void Window::init(int windowWidth, int windowHeight, const char *title) {
+    void Window::init(int windowWidth, int windowHeight, const char* title) {
         this->windowWidth = windowWidth;
         this->windowHeight = windowHeight;
         this->title = title;
-
     }
 
     void Window::startWindow() {
         if (!glfwInit()) {
-            std::cerr << "Failed to initialize GLFW" << std::endl;
+            cerr << "Failed to initialize GLFW" << endl;
             return;
         }
 
@@ -41,7 +41,7 @@ namespace GameEngine {
         // Create the window
         glfwWindow = glfwCreateWindow(windowWidth, windowHeight, title, nullptr, nullptr);
         if (glfwWindow == nullptr) {
-            std::cerr << "Failed to create GLFW window" << std::endl;
+            cerr << "Failed to create GLFW window" << endl;
             glfwTerminate();
             return;
         }
@@ -49,7 +49,7 @@ namespace GameEngine {
         glfwMakeContextCurrent(glfwWindow);
 
         if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
-            std::cerr << "Failed to initialize GLAD" << std::endl;
+            cerr << "Failed to initialize GLAD" << endl;
             glfwTerminate();
             return;
         }
@@ -76,6 +76,20 @@ namespace GameEngine {
         glfwSwapInterval(1);    // Enable v-sync: Sets max FPS to screen refresh rate
 
         glfwShowWindow(glfwWindow);
+        changeScene(0);
+    }
+
+    void Window::terminateWindow() {
+        delete title;
+    }
+
+    void Window::changeScene(int scene) {
+        switch(scene) {
+            case 0:
+                currentScene = new MainScene();
+                currentScene->init();
+                break;
+        }
     }
 
     GLFWwindow* Window::getGlfwWindow() const {
@@ -88,5 +102,9 @@ namespace GameEngine {
 
     int Window::getWindowHeight() const {
         return windowHeight;
+    }
+
+    Scene* Window::getCurrentScene() {
+        return currentScene;
     }
 }

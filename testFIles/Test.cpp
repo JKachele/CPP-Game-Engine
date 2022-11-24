@@ -5,10 +5,27 @@
  *License-------Mozilla Public License Version 2.0
  ******************************************/
 #include <iostream>
-#include <glm/mat4x4.hpp>
+#include <fstream>
+
+using std::cout;
+using std::cerr;
+using std::string;
+using std::endl;
 
 int main() {
-    glm::mat4x4 mat{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
+    std::ifstream vert{"test.txt"};
 
-    std::cout << mat[1][0] << std::endl;
+    if (!vert) {
+        cerr << "Failed to open test.txt" << endl;
+    }
+
+    while (vert) {
+        string line;
+        std::getline(vert, line);
+        if (line.empty()) continue;
+        cout << line << endl;
+    }
+    vert.close();
+
+    return 0;
 }

@@ -7,11 +7,13 @@
 #ifndef window_H
 #define window_H
 #include "core.h"
-#include "util/Color.h"
+#include "scenes/Scene.h"
+#include "scenes/MainScene.h"
 
 namespace GameEngine {
     class Window {
         static Window* instance;
+        static Scene* currentScene;
         GLFWwindow* glfwWindow;
         int windowWidth;
         int windowHeight;
@@ -26,11 +28,17 @@ namespace GameEngine {
 
         void startWindow();
 
+        void terminateWindow();
+
+        static void changeScene(int scene);
+
         GLFWwindow *getGlfwWindow() const;
 
         int getWindowWidth() const;
 
         int getWindowHeight() const;
+
+        static Scene* getCurrentScene();
     };
 }
 

@@ -21,6 +21,7 @@ namespace GameEngine {
 
     void Engine::terminate() {
         glfwTerminate();
+        window->terminateWindow();
     }
 
     void Engine::gameLoop() {
@@ -37,6 +38,10 @@ namespace GameEngine {
 
             glClear(GL_COLOR_BUFFER_BIT);
 
+            if (dt >= 0) {
+                window->getCurrentScene()->update(dt);
+            }
+
             glfwSwapBuffers(window->getGlfwWindow());
 
             UserInputs::endFrame();
@@ -45,5 +50,7 @@ namespace GameEngine {
             dt = endTime - beginTime;
             beginTime = endTime;
         }
+
+//        terminate();
     }
 }

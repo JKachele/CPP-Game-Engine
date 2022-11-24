@@ -11,6 +11,7 @@ class Scene {
 public:
     Scene();
 
+    virtual void init() = 0;
     virtual void update(float dt) = 0;
 };
 

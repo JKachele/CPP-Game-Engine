@@ -11,7 +11,7 @@ using namespace GameEngine;
 const int WIDTH = 1920;
 const int HEIGHT = 1080;
 const char* TITLE = "Game Engine";
-const Color BACKGROUND_COLOR = Colors::BLACK;
+const Color BACKGROUND_COLOR = Colors::PURPLE;
 
 int main() {
     Engine engine{WIDTH, HEIGHT, TITLE, BACKGROUND_COLOR};

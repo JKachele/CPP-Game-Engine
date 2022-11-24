@@ -14,6 +14,13 @@
 #include <glm/gtc/type_ptr.hpp>
 
 #include <iostream>
+#include <string>
 
+#include "util/Color.h"
+
+using std::cout;
+using std::cerr;
+using std::string;
+using std::endl;
 
 #endif //CPP_GAME_ENGINE_CORE_H
