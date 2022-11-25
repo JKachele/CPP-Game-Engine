@@ -6,6 +6,7 @@
  ******************************************/
 #include <fstream>
 #include <iostream>
+#include <sstream>
 #include "render/Shader.h"
 
 namespace GameEngine {
@@ -26,25 +27,19 @@ namespace GameEngine {
             return;
         }
 
-        while (vert) {
-            string line;
-            std::getline(vert, line);
-            if (line.empty()) continue;
-            vertexShaderString += line;
-            vertexShaderString += "\n";
-        }
+        std::stringstream vertStream;
+        vertStream << vert.rdbuf();
         vert.close();
-        this->vertexShader = vertexShaderString.c_str();
+        vertexShaderString = vertStream.str();
+        this->vertexShader = strcpy(new char[vertexShaderString.length() + 1],
+                                    vertexShaderString.c_str());
 
-        while (frag) {
-            string line;
-            std::getline(frag, line);
-            if (line.empty()) continue;
-            fragmentShaderString += line;
-            fragmentShaderString += "\n";
-        }
+        std::stringstream fragStream;
+        fragStream << frag.rdbuf();
         frag.close();
-        this->fragmentShader = fragmentShaderString.c_str();
+        fragmentShaderString = fragStream.str();
+        this->fragmentShader = strcpy(new char[fragmentShaderString.length() + 1],
+                                      fragmentShaderString.c_str());
     }
 #pragma clang diagnostic pop
 

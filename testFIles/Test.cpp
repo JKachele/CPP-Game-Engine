@@ -13,7 +13,8 @@ using std::string;
 using std::endl;
 
 int main() {
-    std::ifstream vert{"test.txt"};
+    std::ifstream vert{"assets/shaders/defaultVert.glsl"};
+    string vertexShaderString;
 
     if (!vert) {
         cerr << "Failed to open test.txt" << endl;
@@ -23,9 +24,12 @@ int main() {
         string line;
         std::getline(vert, line);
         if (line.empty()) continue;
-        cout << line << endl;
+        vertexShaderString += line;
+        vertexShaderString += "\n";
     }
     vert.close();
+
+    cout << vertexShaderString << endl;
 
     return 0;
 }
