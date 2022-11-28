@@ -30,27 +30,25 @@ namespace GameEngine {
         float dt = -1;
 
         glClearColor(backgroundColor.r, backgroundColor.g,
-                     backgroundColor.b, backgroundColor.a);
+                     backgroundColor.b, backgroundColor.a);     // Sets the background color of the screen
 
         while(!glfwWindowShouldClose(window->getGlfwWindow())) {
 
-            glfwPollEvents();
+            glfwPollEvents();       // looks or events like a mouse or keyboard being pressed
 
-            glClear(GL_COLOR_BUFFER_BIT);
+            glClear(GL_COLOR_BUFFER_BIT);       // Sets the color of the screen to be updated
 
             if (dt >= 0) {
                 window->getCurrentScene()->update(dt);
             }
 
-            glfwSwapBuffers(window->getGlfwWindow());
+            glfwSwapBuffers(window->getGlfwWindow());   // Render the new frame to the window
 
             UserInputs::endFrame();
 
-            endTime = glfwGetTime();
+            endTime = glfwGetTime();        // Calculate the tine to render a frame (Framerate)
             dt = endTime - beginTime;
             beginTime = endTime;
         }
-
-//        terminate();
     }
 }

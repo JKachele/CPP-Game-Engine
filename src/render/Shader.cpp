@@ -18,6 +18,7 @@ namespace GameEngine {
         string vertexShaderString;
         string fragmentShaderString;
 
+        // Open files into input streams
         if (!vert) {
             cerr << "Failed to open file " << vertexShaderFile << endl;
             return;
@@ -27,10 +28,12 @@ namespace GameEngine {
             return;
         }
 
+        // Read file into string stream then into a string
         std::stringstream vertStream;
         vertStream << vert.rdbuf();
         vert.close();
         vertexShaderString = vertStream.str();
+        // Convert from std::string to c style string. Have to copy to prevent zero pointer errors ¯\_(ツ)_/¯
         this->vertexShader = strcpy(new char[vertexShaderString.length() + 1],
                                     vertexShaderString.c_str());
 

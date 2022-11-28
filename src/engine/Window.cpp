@@ -11,7 +11,7 @@ namespace GameEngine {
     Window* Window::instance = 0;
     Scene* Window::currentScene = 0;
 
-    Window* Window::getInstance() {
+    Window* Window::getInstance() {     // Singleton instance
         if (!instance) {
             instance = new Window();
         }

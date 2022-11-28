@@ -8,9 +8,9 @@
 
 using namespace GameEngine;
 
-const int WIDTH = 1920;
-const int HEIGHT = 1080;
-const char* TITLE = "Game Engine";
+const int WIDTH = 1920;                         // Default pixel width of the window
+const int HEIGHT = 1080;                        // Default pixel height of the window
+const char* TITLE = "Game Engine";              // Title of the window
 const Color BACKGROUND_COLOR = Colors::PURPLE;
 
 int main() {
