@@ -9,8 +9,8 @@
 namespace GameEngine {
 
     void MainScene::init() {
-        std::string defaultShaderVert = "assets/shaders/defaultVert.glsl";
-        std::string defaultShaderFrag = "assets/shaders/defaultFrag.glsl";
+        std::string defaultShaderVert = "../assets/shaders/defaultVert.glsl";
+        std::string defaultShaderFrag = "../assets/shaders/defaultFrag.glsl";
         defaultShader = new Shader(defaultShaderVert, defaultShaderFrag);
         defaultShader->compile();
 

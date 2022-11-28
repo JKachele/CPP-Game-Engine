@@ -79,10 +79,6 @@ namespace GameEngine {
         changeScene(0);
     }
 
-    void Window::terminateWindow() {
-        delete title;
-    }
-
     void Window::changeScene(int scene) {
         switch(scene) {
             case 0:

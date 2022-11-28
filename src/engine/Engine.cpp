@@ -21,7 +21,6 @@ namespace GameEngine {
 
     void Engine::terminate() {
         glfwTerminate();
-        window->terminateWindow();
     }
 
     void Engine::gameLoop() {
