@@ -8,6 +8,7 @@
 #define CPP_GAME_ENGINE_MAINSCENE_H
 #include "Scene.h"
 #include "render/Shader.h"
+#include "render/Texture.h"
 
 namespace GameEngine {
     class MainScene : public Scene {
@@ -15,6 +16,7 @@ namespace GameEngine {
         unsigned int vboID;
         unsigned int eboID;
         Shader* defaultShader;
+//        Texture*
 
         float vertexArray[36] = {
                 // Position                            // Color                                   // UV Coordinates

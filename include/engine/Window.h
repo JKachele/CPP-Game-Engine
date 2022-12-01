@@ -28,8 +28,6 @@ namespace GameEngine {
 
         void startWindow();
 
-        void terminateWindow();
-
         static void changeScene(int scene);
 
         GLFWwindow *getGlfwWindow() const;
