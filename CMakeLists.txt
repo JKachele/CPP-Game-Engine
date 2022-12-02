@@ -20,10 +20,11 @@ set(SOURCE_FILES
         src/scenes/MainScene.cpp
         include/scenes/MainScene.h
         src/render/Shader.cpp
-        include/render/Shader.h src/render/Texture.cpp include/render/Texture.h)
+        include/render/Shader.h
+        src/render/Texture.cpp
+        include/render/Texture.h)
 
 add_executable(Game_Engine ${SOURCE_FILES} ${EXTERNAL})
-add_executable(Scratch testFiles/Test.cpp)
 include_directories(include)
 include_directories(include)
 include_directories(external/glad/include)

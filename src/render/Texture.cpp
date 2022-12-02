@@ -4,8 +4,11 @@
  *Date----------11/15/2022
  *License-------Mozilla Public License Version 2.0
  ******************************************/
-
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "OCUnusedMacroInspection"
 #include "render/Texture.h"
+#define STB_IMAGE_IMPLEMENTATION
+#include "stb_image.h"
 
 namespace GameEngine {
 
@@ -14,9 +17,10 @@ namespace GameEngine {
         glGenTextures(1, &id);
         glBindTexture(GL_TEXTURE_2D, id);
 
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
+        stbi_set_flip_vertically_on_load(true);
         int nChannels;
         unsigned char* data = stbi_load(filePath.c_str(), &width, &height, &nChannels, 0);
 
@@ -46,3 +50,4 @@ namespace GameEngine {
     }
 
 } // GameEngine
+#pragma clang diagnostic pop

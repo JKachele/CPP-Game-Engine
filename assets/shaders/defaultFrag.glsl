@@ -8,5 +8,6 @@ uniform sampler2D uTextures;
 out vec4 color;
 
 void main() {
-    color = fColor;
+    color = texture(uTextures, fUVCoords);
+//    color = fColor;
 }

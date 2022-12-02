@@ -4,7 +4,6 @@
  *Date----------11/15/2022
  *License-------Mozilla Public License Version 2.0
  ******************************************/
-
 #ifndef CPP_GAME_ENGINE_TEXTURE_H
 #define CPP_GAME_ENGINE_TEXTURE_H
 #include "core.h"

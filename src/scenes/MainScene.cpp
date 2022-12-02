@@ -14,6 +14,8 @@ namespace GameEngine {
         defaultShader = new Shader(defaultShaderVert, defaultShaderFrag);
         defaultShader->compile();
 
+        texture = new Texture{"../assets/textures/TestImage.png"};
+
         // ============================================================
         // Generate VAO, VBO, and EBO buffer objects, and send to GPU
         // ============================================================
@@ -47,6 +49,11 @@ namespace GameEngine {
 
     void MainScene::update(float dt) {
         defaultShader->use();
+
+        // Upload Texture to shader
+        defaultShader->uploadTexture("TEX_SAMPLER", 0);
+        glActiveTexture(GL_TEXTURE0);
+        texture->bind();
 
         glBindVertexArray(vaoID);
 
