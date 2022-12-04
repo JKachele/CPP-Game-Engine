@@ -16,7 +16,8 @@ namespace GameEngine {
         unsigned int vboID;
         unsigned int eboID;
         Shader* defaultShader;
-        Texture* texture;
+        Texture* texture1;
+        Texture* texture2;
 
         float vertexArray[36] = {
                 // Position                            // Color                                   // UV Coordinates

@@ -14,7 +14,8 @@ namespace GameEngine {
         defaultShader = new Shader(defaultShaderVert, defaultShaderFrag);
         defaultShader->compile();
 
-        texture = new Texture{"../assets/textures/TestImage.png"};
+        texture1 = new Texture{"../assets/textures/TestImage.png"};
+        texture2 = new Texture{"../assets/textures/CompanionCube.png"};
 
         // ============================================================
         // Generate VAO, VBO, and EBO buffer objects, and send to GPU
@@ -51,9 +52,13 @@ namespace GameEngine {
         defaultShader->use();
 
         // Upload Texture to shader
-        defaultShader->uploadTexture("TEX_SAMPLER", 0);
+        defaultShader->uploadTexture("texture1", 0);
         glActiveTexture(GL_TEXTURE0);
-        texture->bind();
+        texture1->bind();
+
+        defaultShader->uploadTexture("texture2", 1);
+        glActiveTexture(GL_TEXTURE1);
+        texture2->bind();
 
         glBindVertexArray(vaoID);
 
